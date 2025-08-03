@@ -9,7 +9,7 @@ except locale.Error:
 
 
 class HoraireExporter:
-    def __init__(self, output_path="horaire.html", css_path="style.css"):
+    def __init__(self, output_path="../database/horaire.html", css_path="style.css"):
         self.output_path = output_path
         self.css_path = css_path
 
@@ -83,7 +83,7 @@ class HoraireExporter:
 
         # Générer une page détaillée pour chaque jour
         for jour in jours_map.values():
-            filename = f"{jour.replace(' ', '_').lower()}.html"
+            filename = f"../database/{jour.replace(' ', '_').lower()}.html"
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(self._build_day_page(jour, cours_par_jour.get(jour, []), jour in jours_feries))
             print(f"✅ Fichier détaillé généré : {filename}")
