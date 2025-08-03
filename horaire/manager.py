@@ -16,6 +16,9 @@ class HoraireManager:
     def run(self):
         print("🔄 Démarrage du gestionnaire d'horaire...")
         try:
+            print('Vérification de l\'existence du dossier de base de données...')
+            database_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "database")
+            os.makedirs(database_path, exist_ok=True)
             print("🔄 Mise à jour de l'horaire en cours manager...")
             jours_map, jours_feries, cours_par_jour = self.scraper.recuperer_horaire()
             exporter = HoraireExporter()
