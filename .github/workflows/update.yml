@@ -2,9 +2,10 @@ name: Mise à jour de l'horaire
 
 on:
   schedule:
-    - cron: '30 0 * * *'
-    - cron: '0 8 * * *'
-    - cron: '30 12 * * *'
+    - cron: '30 22 * * *'
+    - cron: '0 6 * * *'
+    - cron: '30 10 * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
