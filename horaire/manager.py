@@ -33,7 +33,8 @@ class HoraireManager:
             print("✅ Horaire mis à jour.")
         except Exception as e:
             print("⚠️ Échec de récupération :", e)
-            if os.path.exists("horaire.html"):
+            backup_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "database", "horaire.html")
+            if os.path.exists(backup_path):
                 print("➡️ Utilisation du dernier horaire sauvegardé.")
             else:
                 print("❌ Aucune sauvegarde disponible.")

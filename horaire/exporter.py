@@ -92,8 +92,10 @@ class HoraireExporter:
 
 
         # Générer une page détaillée pour chaque jour
+        
+        output_dir = os.path.dirname(self.output_path)
         for jour in jours_map.values():
-            filename = f"../database/{jour.replace(' ', '_').lower()}.html"
+            filename = os.path.join(output_dir, f"{jour.replace(' ', '_').lower()}.html")
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(self._build_day_page(jour, cours_par_jour.get(jour, []), jour in jours_feries))
             print(f"✅ Fichier détaillé généré : {filename}")
