@@ -6,13 +6,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from collections import defaultdict
 
+
 class HoraireScraper:
     def __init__(self, target_label, headless=True):
         self.target_label = target_label
 
         options = Options()
         if headless:
-            options.add_argument("--headless=new")  # Pour Chromium 109+
+            options.add_argument("--headless=new")
         options.add_argument("--disable-gpu")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
@@ -25,7 +26,6 @@ class HoraireScraper:
         self.driver.quit()
 
     def recuperer_horaire(self):
-        print("🔍 Récupération de l'horaire...")
         self.driver.get("https://hplanning2024.umons.ac.be/invite")
         self.wait.until(EC.element_to_be_clickable((By.ID, "GInterface.Instances[1].Instances[1].bouton_Edit"))).click()
         self.wait.until(EC.presence_of_element_located((By.ID, "GInterface.Instances[1].Instances[1]_Contenu")))
@@ -39,9 +39,6 @@ class HoraireScraper:
                 if text == self.target_label:
                     el.click()
                     found = True
-                    # Debug
-                    # WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located((By.ID, "id_2_bloquer")))
-                    # self.driver.find_element(By.ID, "GInterface.Instances[1].Instances[3]_j_49").click()
                     return self.extraire_horaire()
                 seen.add(text)
             if found:
@@ -51,7 +48,6 @@ class HoraireScraper:
         raise Exception("Option non trouvée")
 
     def extraire_horaire(self):
-        print("🔄 Extraction de l'horaire...")
         grille = self.wait.until(EC.presence_of_element_located((By.ID, "GInterface.Instances[1].Instances[7]_Grille_Elements")))
         cours_elements = grille.find_elements(By.CLASS_NAME, "EmploiDuTemps_Element")
 
