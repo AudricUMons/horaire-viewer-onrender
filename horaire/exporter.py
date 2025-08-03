@@ -40,7 +40,7 @@ class HoraireExporter:
         for jour in jours_map.values():
             
             output_dir = os.path.dirname(self.output_path)
-            filename = os.path.join(output_dir, f"{jour.replace(' ', '_').lower()}.html")
+            filename = f"{jour.replace(' ', '_').lower()}.html"
             
             if jour in jours_feries:
                 html.append(
