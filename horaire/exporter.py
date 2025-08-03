@@ -78,7 +78,7 @@ class HoraireExporter:
             "</html>"
         ]
         
-        print("HTML généré, écriture dans le fichier")
+        print(f"HTML généré, écriture dans le fichier {self.output_path}")
 
         with open(self.output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(html))
