@@ -21,7 +21,9 @@ class HoraireManager:
             os.makedirs(database_path, exist_ok=True)
             print("🔄 Mise à jour de l'horaire en cours manager...")
             jours_map, jours_feries, cours_par_jour = self.scraper.recuperer_horaire()
+            print("✅ Horaire récupéré avec succès.")
             exporter = HoraireExporter()
+            print("🔄 Exportation de l'horaire...")
             exporter.export(jours_map, jours_feries, cours_par_jour)
             print("✅ Horaire mis à jour.")
         except Exception as e:

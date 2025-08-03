@@ -51,6 +51,7 @@ class HoraireScraper:
         raise Exception("Option non trouvée")
 
     def extraire_horaire(self):
+        print("🔄 Extraction de l'horaire...")
         grille = self.wait.until(EC.presence_of_element_located((By.ID, "GInterface.Instances[1].Instances[7]_Grille_Elements")))
         cours_elements = grille.find_elements(By.CLASS_NAME, "EmploiDuTemps_Element")
 
