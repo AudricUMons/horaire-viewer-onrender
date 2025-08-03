@@ -14,6 +14,9 @@ class HoraireExporter:
         self.css_path = css_path
 
     def export(self, jours_map, jours_feries, cours_par_jour):
+        
+        print("🔄 Exportation de l'horaire inside méthod")
+        
         if os.path.exists(self.output_path):
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             shutil.copy(self.output_path, f"{self.output_path}.{timestamp}.bak")
@@ -74,6 +77,8 @@ class HoraireExporter:
             "</body>",
             "</html>"
         ]
+        
+        print("HTML généré, écriture dans le fichier")
 
         with open(self.output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(html))
@@ -87,6 +92,8 @@ class HoraireExporter:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(self._build_day_page(jour, cours_par_jour.get(jour, []), jour in jours_feries))
             print(f"✅ Fichier détaillé généré : {filename}")
+            
+            
     def _build_day_page(self, jour, cours, ferie=False):
         html = [
             "<!DOCTYPE html>",
