@@ -2,6 +2,7 @@ import os
 from datetime import datetime, timedelta
 import shutil
 import locale
+
 try:
     locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 except locale.Error:
@@ -12,12 +13,8 @@ class HoraireExporter:
     def __init__(self, output_path="../database/horaire.html", css_path="style.css"):
         self.output_path = output_path
         self.css_path = css_path
-        print(f"🔄 Initialisation de l'exportateur avec le chemin : {self.output_path} et le CSS : {self.css_path}")
 
     def export(self, jours_map, jours_feries, cours_par_jour):
-        
-        print("🔄 Exportation de l'horaire inside méthod")
-        
         if os.path.exists(self.output_path):
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             shutil.copy(self.output_path, f"{self.output_path}.{timestamp}.bak")
@@ -38,10 +35,8 @@ class HoraireExporter:
         ]
 
         for jour in jours_map.values():
-            
-            output_dir = os.path.dirname(self.output_path)
             filename = f"{jour.replace(' ', '_').lower()}.html"
-            
+
             if jour in jours_feries:
                 html.append(
                     f"<a class='card ferie' href='{filename}'>"
@@ -81,26 +76,16 @@ class HoraireExporter:
             "</body>",
             "</html>"
         ]
-        
-        print(f"HTML généré, écriture dans le fichier {self.output_path}")
-        
 
         with open(self.output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(html))
-            
-        print(f"✅ Fichier généré : {self.output_path}")
 
-
-        # Générer une page détaillée pour chaque jour
-        
         output_dir = os.path.dirname(self.output_path)
         for jour in jours_map.values():
             filename = os.path.join(output_dir, f"{jour.replace(' ', '_').lower()}.html")
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(self._build_day_page(jour, cours_par_jour.get(jour, []), jour in jours_feries))
-            print(f"✅ Fichier détaillé généré : {filename}")
-            
-            
+
     def _build_day_page(self, jour, cours, ferie=False):
         html = [
             "<!DOCTYPE html>",
@@ -155,7 +140,7 @@ class HoraireExporter:
             "</html>"
         ]
         return "\n".join(html)
-    
+
     def _get_date_range(self):
         today = datetime.today()
         start = today - timedelta(days=today.weekday())
@@ -165,20 +150,12 @@ class HoraireExporter:
             "January": "janvier", "February": "février", "March": "mars", "April": "avril",
             "May": "mai", "June": "juin", "July": "juillet", "August": "août",
             "September": "septembre", "October": "octobre", "November": "novembre", "December": "décembre",
-            "janvier": "janvier", "février": "février", "mars": "mars", "avril": "avril",
-            "mai": "mai", "juin": "juin", "juillet": "juillet", "août": "août",
-            "septembre": "septembre", "octobre": "octobre", "novembre": "novembre", "décembre": "décembre"
         }
 
-        mois_debut_en = start.strftime("%B")
-        mois_fin_en = end.strftime("%B")
-
-        mois_debut = mois_fr.get(mois_debut_en, mois_debut_en)
-        mois_fin = mois_fr.get(mois_fin_en, mois_fin_en)
+        mois_debut = mois_fr.get(start.strftime("%B"), start.strftime("%B"))
+        mois_fin = mois_fr.get(end.strftime("%B"), end.strftime("%B"))
 
         if mois_debut == mois_fin:
             return f"{start.day} au {end.day} {mois_fin} {start.year}"
         else:
             return f"{start.day} {mois_debut} au {end.day} {mois_fin} {start.year}"
-
-
