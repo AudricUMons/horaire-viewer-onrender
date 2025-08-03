@@ -12,6 +12,7 @@ class HoraireExporter:
     def __init__(self, output_path="../database/horaire.html", css_path="style.css"):
         self.output_path = output_path
         self.css_path = css_path
+        print(f"🔄 Initialisation de l'exportateur avec le chemin : {self.output_path} et le CSS : {self.css_path}")
 
     def export(self, jours_map, jours_feries, cours_par_jour):
         
@@ -37,7 +38,10 @@ class HoraireExporter:
         ]
 
         for jour in jours_map.values():
-            filename = f"{jour.replace(' ', '_').lower()}.html"
+            
+            output_dir = os.path.dirname(self.output_path)
+            filename = os.path.join(output_dir, f"{jour.replace(' ', '_').lower()}.html")
+            
             if jour in jours_feries:
                 html.append(
                     f"<a class='card ferie' href='{filename}'>"

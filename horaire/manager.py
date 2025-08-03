@@ -22,7 +22,12 @@ class HoraireManager:
             print("🔄 Mise à jour de l'horaire en cours manager...")
             jours_map, jours_feries, cours_par_jour = self.scraper.recuperer_horaire()
             print("✅ Horaire récupéré avec succès.")
-            exporter = HoraireExporter()
+            output_path = os.path.join(
+                os.path.dirname(os.path.dirname(__file__)),
+                "database",
+                "horaire.html"
+            )
+            exporter = HoraireExporter(output_path=output_path, css_path="style.css")
             print("🔄 Exportation de l'horaire...")
             exporter.export(jours_map, jours_feries, cours_par_jour)
             print("✅ Horaire mis à jour.")
