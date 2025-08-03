@@ -9,7 +9,7 @@ except locale.Error:
 
 
 class HoraireExporter:
-    def __init__(self, output_path="../database/horaire.html", css_path="style.css"):
+    def __init__(self, output_path="horaire.html", css_path="style.css"):
         self.output_path = output_path
         self.css_path = css_path
 
