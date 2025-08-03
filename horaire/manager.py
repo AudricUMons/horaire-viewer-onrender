@@ -29,6 +29,8 @@ class HoraireManager:
             if os.path.exists("horaire.html"):
                 print("➡️ Utilisation du dernier horaire sauvegardé.")
             else:
+                print("⚠️ Échec de récupération :", e)
+                print("📌 Type d'erreur :", type(e))
                 print("❌ Aucune sauvegarde disponible.")
         finally:
             self.scraper.close()
