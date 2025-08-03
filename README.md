@@ -1,8 +1,3 @@
-Voici le contenu **complet** du fichier `README.md` :
-
----
-
-````markdown
 # 🗓️ Horaire Viewer – Version en ligne
 
 Ce projet génère dynamiquement une page HTML contenant le **planning UMONS**, qui est :
@@ -25,7 +20,7 @@ horaire-viewer-onrender/
 ├── requirements.txt       # Modules nécessaires (ex: selenium)
 ├── render.yaml            # Tâches automatiques Render (cron + site)
 └── README.md              # Ce fichier
-````
+```
 
 ---
 
@@ -33,8 +28,8 @@ horaire-viewer-onrender/
 
 Le script Python est exécuté **3 fois par jour automatiquement** :
 
-| Heure (UTC+2) | Action                    |
-| ------------- | ------------------------- |
+| Heure (UTC+2) | Action                   |
+|---------------|--------------------------|
 | 00:30         | Récupération de l’horaire |
 | 08:00         | Mise à jour matinale      |
 | 12:30         | Mise à jour de midi       |
@@ -45,10 +40,10 @@ Le dossier `database/` est mis à jour et publié en ligne automatiquement.
 
 ## 🚀 Technologies
 
-* [Python 3](https://www.python.org/)
-* [Selenium](https://pypi.org/project/selenium/)
-* [Render.com](https://render.com) – hébergement gratuit avec cron
-* HTML / CSS statique
+- [Python 3](https://www.python.org/)
+- [Selenium](https://pypi.org/project/selenium/)
+- [Render.com](https://render.com) – hébergement gratuit avec cron
+- HTML / CSS statique
 
 ---
 
