@@ -79,6 +79,26 @@ class HoraireExporter:
         ]
         
         print(f"HTML généré, écriture dans le fichier {self.output_path}")
+        
+        import os
+
+        def afficher_arborescence(base_path, prefix=""):
+            try:
+                for nom in os.listdir(base_path):
+                    chemin = os.path.join(base_path, nom)
+                    if os.path.isdir(chemin):
+                        print(f"{prefix}📁 {nom}/")
+                        afficher_arborescence(chemin, prefix + "  ")
+                    else:
+                        print(f"{prefix}📄 {nom}")
+            except Exception as e:
+                print(f"{prefix}❌ Impossible d'accéder à {base_path} : {e}")
+
+        print("\n📂 Arborescence autour du script :")
+        racine = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        afficher_arborescence(racine)
+
+        
 
         with open(self.output_path, "w", encoding="utf-8") as f:
             f.write("\n".join(html))
